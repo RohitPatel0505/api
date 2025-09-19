@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5jsnx4y&ava2f4-!bu^!s%&dit9p72awz&7nt7aay#=(+1c#nt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 
 # Application definition
@@ -116,9 +116,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+
+# 👇 Add this line (important for Render)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# (Optional, but recommended for production)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
